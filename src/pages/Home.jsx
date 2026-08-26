@@ -172,39 +172,6 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl px-4 py-18 sm:px-6 lg:px-8 lg:py-24">
         <SectionHeading
-          eyebrow="Photo Highlights"
-          title="Real moments from previous DevNest sessions"
-          description="These images now show the actual people, space, and energy behind the community."
-        />
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm">
-            <img
-              src="/images/event-photo-group-2.jpg"
-              alt="DevNest Eldoret group photo after a previous event at The WorkNest."
-              className="h-full min-h-[420px] w-full object-cover"
-            />
-          </div>
-          <div className="grid gap-6">
-            <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
-              <img
-                src="/images/event-photo-team-2.jpg"
-                alt="DevNest Eldoret community member standing beside the event banner."
-                className="h-64 w-full object-cover"
-              />
-            </div>
-            <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
-              <img
-                src="/images/event-photo-team-3.jpg"
-                alt="DevNest Eldoret community lead pictured with the DevNest banner."
-                className="h-64 w-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-18 sm:px-6 lg:px-8 lg:py-24">
-        <SectionHeading
           eyebrow="Partners"
           title="Built with local ecosystem partners"
           description="DevNest Eldoret works alongside organizations that support community learning, practical events, and stronger execution in Eldoret."

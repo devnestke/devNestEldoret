@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { cn } from '../lib/cn.js'
+import SeoManager from './SeoManager.jsx'
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -78,6 +79,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
+      <SeoManager />
       <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <Link to="/" className="shrink-0" aria-label="DevNest Eldoret home">
