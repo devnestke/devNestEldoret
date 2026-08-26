@@ -36,7 +36,7 @@ const communityMoments = [
   {
     title: 'Hands-on Workshops',
     description: 'Live coding, prompt teardown sessions, and practical build time where members work shoulder to shoulder.',
-    image: '/images/event-photo-team-1.jpg',
+    image: '/images/event-photo-session-room.jpg',
   },
   {
     title: 'Small Group Mentoring',
@@ -46,7 +46,7 @@ const communityMoments = [
   {
     title: 'Builder Networking',
     description: 'The community is designed to feel human first, with room for conversation, collaboration, and follow-through.',
-    image: '/images/event-photo-group-1.jpg',
+    image: '/images/event-photo-group-discussion.jpg',
   },
 ]
 
