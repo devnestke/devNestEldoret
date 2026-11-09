@@ -117,7 +117,7 @@ export default function About() {
           </p>
           <figure className="mt-6">
             <img
-              src="/images/event-photo-team-1-optimized.jpg"
+              src="/images/devnestcommunity.jpg"
               alt="DevNest Eldoret members gathered at a community event."
               className="aspect-[16/9] w-full rounded-md object-cover"
               loading="lazy"

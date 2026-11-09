@@ -1,3 +1,5 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import SectionHeading from "../components/SectionHeading.jsx";
 import partners from "../data/partners.js";
@@ -42,6 +44,15 @@ const communityPrinciples = [
 ];
 
 export default function Home() {
+  const partnerSliderRef = useRef(null);
+
+  function scrollPartners(direction) {
+    partnerSliderRef.current?.scrollBy({
+      left: direction * 280,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <div>
       <section className="relative overflow-hidden border-b border-blue-200 bg-[#e8f1ff]">
@@ -124,7 +135,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-emerald-200 bg-[#eaf5f1]">
+      <section className="border-y border-blue-200 bg-[#e8f1ff]">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
           <SectionHeading
             eyebrow="In the community"
@@ -162,11 +173,38 @@ export default function Home() {
             description="DevNest Eldoret works alongside organizations that support community learning, practical events, and stronger execution in Eldoret."
             align="center"
           />
-          <div className="mt-8 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 flex items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => scrollPartners(-1)}
+              aria-label="Show previous partners"
+              aria-controls="home-partners"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-300 text-[#4064AF] transition hover:bg-white focus:outline-none focus:ring-4 focus:ring-[#4064AF]/20"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollPartners(1)}
+              aria-label="Show next partners"
+              aria-controls="home-partners"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-300 text-[#4064AF] transition hover:bg-white focus:outline-none focus:ring-4 focus:ring-[#4064AF]/20"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+          <div
+            id="home-partners"
+            ref={partnerSliderRef}
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Community partners"
+            className="mt-3 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-3"
+          >
             {partners.map((partner) => (
               <article
                 key={partner.name}
-                className="border-t border-blue-200 py-5"
+                className="flex w-64 shrink-0 snap-start flex-col border-t border-blue-200 py-5 lg:w-80"
               >
                 <a
                   href={partner.website}

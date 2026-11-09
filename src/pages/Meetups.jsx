@@ -19,6 +19,13 @@ export default function Meetups() {
     });
   }, [query, status]);
 
+  const upcomingMeetup = filteredMeetups.find(
+    (meetup) => meetup.status === "Upcoming",
+  );
+  const completedMeetups = filteredMeetups.filter(
+    (meetup) => meetup.status === "Completed",
+  );
+
   return (
     <div>
       <section className="border-b border-blue-200 bg-[#e8f1ff]">
@@ -61,71 +68,142 @@ export default function Meetups() {
         </div>
       </section>
 
-      <section className="border-y border-orange-200 bg-[#fff7ef]">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-          <SectionHeading
-            eyebrow="Meetup schedule"
-            title="Upcoming and past events"
-            description="Browse upcoming sessions and revisit previous DevNest meetups."
-          />
-          <div className="mt-5 divide-y divide-slate-200">
-            {filteredMeetups.map((meetup) => (
-              <article
-                key={meetup.id}
-                className="grid gap-4 py-5 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-6"
-              >
-                <img
-                  src={meetup.image}
-                  alt={`${meetup.title} event image`}
-                  className="h-44 w-full rounded-md object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
+      {upcomingMeetup ? (
+        <section className="border-y border-blue-200 bg-[#e8f1ff]">
+          <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-14">
+            <img
+              src={upcomingMeetup.image}
+              alt={`${upcomingMeetup.title} event poster`}
+              className="aspect-[1170/570] w-full rounded-md object-contain"
+              loading="eager"
+              decoding="async"
+            />
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0F807B]">
+                Upcoming event
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold text-slate-950 sm:text-4xl">
+                {upcomingMeetup.title}
+              </h2>
+              <p className="mt-4 text-sm leading-6 text-slate-600">
+                {upcomingMeetup.summary}
+              </p>
+              <div className="mt-6 grid gap-4 border-t border-blue-200 pt-5 sm:grid-cols-2">
                 <div>
-                  <div className="flex items-center justify-between gap-4">
-                    <h3 className="text-2xl font-semibold text-slate-950">
-                      {meetup.title}
-                    </h3>
-                    <span
-                      className={`shrink-0 text-xs font-semibold uppercase tracking-[0.16em] ${meetup.status === "Upcoming" ? "text-[#0066FF]" : "text-slate-500"}`}
-                    >
-                      {meetup.status}
-                    </span>
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    Date
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-slate-950">
+                    {upcomingMeetup.dateLabel}
+                  </p>
+                </div>
+                {upcomingMeetup.venue ? (
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                      Venue
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-slate-950">
+                      {upcomingMeetup.venue}
+                    </p>
                   </div>
-                  <p className="mt-3 text-sm text-slate-500">
-                    {meetup.dateLabel}
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">
-                    {meetup.summary}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    {meetup.status === "Upcoming" ? (
-                      <a
-                        href={meetup.registrationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex rounded-full bg-[#0066FF] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#0050cc]"
-                      >
-                        Get Ticket
-                      </a>
-                    ) : null}
+                ) : null}
+              </div>
+              <a
+                href={upcomingMeetup.registrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex rounded-full bg-[#0066FF] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0050cc]"
+              >
+                Get Ticket
+              </a>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {completedMeetups.length > 0 ? (
+        <section className="border-b border-orange-200 bg-[#fff7ef]">
+          <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+            <SectionHeading
+              eyebrow="Past events"
+              title="Previous meetups"
+              description="Browse past sessions and open event photo albums."
+            />
+            <div className="mt-5 divide-y divide-orange-200">
+              {completedMeetups.map((meetup) => {
+                const date = new Date(`${meetup.dateISO}T12:00:00Z`);
+                const day = new Intl.DateTimeFormat("en", {
+                  day: "2-digit",
+                  timeZone: "UTC",
+                }).format(date);
+                const month = new Intl.DateTimeFormat("en", {
+                  month: "short",
+                  timeZone: "UTC",
+                }).format(date);
+                const weekday = new Intl.DateTimeFormat("en", {
+                  weekday: "short",
+                  timeZone: "UTC",
+                }).format(date);
+
+                return (
+                  <article
+                    key={meetup.id}
+                    className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-4 gap-y-3 py-5 sm:grid-cols-[4rem_minmax(0,1fr)_7rem_auto] sm:items-center sm:gap-x-5"
+                  >
+                    <div className="row-span-2 flex h-16 w-14 flex-col items-center justify-center rounded-md bg-[#4064AF] text-white sm:row-span-1 sm:h-[4.5rem] sm:w-16">
+                      <span className="text-[0.65rem] font-semibold uppercase">
+                        {weekday}
+                      </span>
+                      <span className="text-2xl font-semibold leading-7">
+                        {day}
+                      </span>
+                      <span className="text-[0.65rem] font-semibold uppercase">
+                        {month}
+                      </span>
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-semibold text-slate-950">
+                        {meetup.title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-6 text-slate-600">
+                        {meetup.summary}
+                      </p>
+                      {meetup.venue ? (
+                        <p className="mt-1 text-xs font-medium text-slate-500">
+                          {meetup.venue}
+                        </p>
+                      ) : null}
+                    </div>
+                    <img
+                      src={meetup.image}
+                      alt=""
+                      className="col-start-2 h-16 w-28 rounded object-cover sm:col-start-auto"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     {meetup.photosUrl ? (
                       <a
                         href={meetup.photosUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:border-[#0066FF] hover:text-[#0066FF]"
+                        className="col-start-2 inline-flex text-sm font-semibold text-[#4064AF] hover:text-[#0F807B] sm:col-start-auto"
                       >
                         View Photos
                       </a>
                     ) : null}
-                  </div>
-                </div>
-              </article>
-            ))}
+                  </article>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
+
+      {filteredMeetups.length === 0 ? (
+        <p className="mx-auto max-w-7xl px-4 py-12 text-sm text-slate-600 sm:px-6 lg:px-8">
+          No meetups match your search.
+        </p>
+      ) : null}
     </div>
   );
 }

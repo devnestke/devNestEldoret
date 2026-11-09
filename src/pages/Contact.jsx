@@ -218,13 +218,13 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="border-t border-emerald-200 bg-[#eaf5f1]">
+      <section className="border-t border-blue-200 bg-[#e8f1ff]">
         <div className="mx-auto max-w-7xl px-4 py-18 sm:px-6 lg:px-8 lg:py-24">
           <SectionHeading
             eyebrow="Partners"
             title="Organizations connected to the community"
           />
-          <div className="mt-8 divide-y divide-emerald-200 border-t border-emerald-200">
+          <div className="mt-8 divide-y divide-blue-200 border-t border-blue-200">
             {partners.map((partner) => (
               <article
                 key={partner.name}
