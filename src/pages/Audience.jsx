@@ -1,5 +1,5 @@
-import SectionHeading from '../components/SectionHeading.jsx'
-import { audienceSegments } from '../data/siteData.js'
+import SectionHeading from "../components/SectionHeading.jsx";
+import { audienceSegments } from "../data/siteData.js";
 
 export default function Audience() {
   return (
@@ -17,13 +17,28 @@ export default function Audience() {
       <section className="mx-auto max-w-7xl px-4 py-18 sm:px-6 lg:px-8">
         <div className="grid gap-6 xl:grid-cols-2">
           {audienceSegments.map((segment, index) => (
-            <article key={segment.title} className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm">
+            <article
+              key={segment.title}
+              className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm"
+            >
               <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[0.92fr_1.08fr]">
-                <img src={segment.image} alt="" className="h-full min-h-64 w-full rounded-[28px] object-cover" />
+                <img
+                  src={segment.image}
+                  alt=""
+                  className="h-full min-h-64 w-full rounded-[28px] object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF6600]">0{index + 1}</p>
-                  <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{segment.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">{segment.description}</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#FF6600]">
+                    0{index + 1}
+                  </p>
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
+                    {segment.title}
+                  </h2>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">
+                    {segment.description}
+                  </p>
                   <ul className="mt-6 space-y-3 text-sm leading-6 text-slate-600">
                     {segment.points.map((point) => (
                       <li key={point} className="flex gap-3">
@@ -39,5 +54,5 @@ export default function Audience() {
         </div>
       </section>
     </div>
-  )
+  );
 }
